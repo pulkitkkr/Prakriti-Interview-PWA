@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Prakriti MSIT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="CSS/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="JS/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="JS/bootstrap.min.js"></script>
+  
+    <script src="JS/angular.min.js"></script>
+    <script src="JS/ngStorage.js"></script>
+    <script src="JS/alasql.min.js"></script>
+    <script src="JS/xlsx.core.min.js"></script>
+    <script type="text/javascript" src="JS/app.js"></script>
+  </head>
+  <body ng-app="Prakriti" ng-init="BasicQues=true;FinalQues=false;Thanks=false;Export=false;DataDelete=false">
+     <div class="navbar-wrapper">
+      <div class="container">
+
+        <nav class="navbar navbar-inverse navbar-static-top">
+          <div ng-controller="navCtrl as navHandler"  class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Prakriti MSIT</a>
+            </div>
+
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a ng-click="navHandler.homeClicked()">Home (Reset)</a></li>
+                <li><a ng-click="navHandler.exportClicked()">Export</a></li>
+                <li><a ng-click="navHandler.deleteAll()">Delete All</a></li>
+               
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+      </div>
+    </div>
+
+
+    
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <img class="first-slide" src="IMG/bg.jpg" style="max-width:100%; max-height:100%; object-fit: cover" alt="First slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Prakriti MSIT</h1>
+              <p>The Earth does not belongs to us, We Belong to The Earth</p>
+            </div>
+          </div>
+        </div>
+      
+    </div><!-- /.carousel -->
+    <center>
+    
+      <div ng-if="BasicQues" ng-controller="BasicCtrl as BasicHandler">
+        <h2>Please Fill These Questions To Proceed</h2>
+        <br/>
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon3">UID:</span>
+                <input ng-model="BasicHandler.Basic.UID" Placeholder="Enter UID alotted while Registration" type="text" class="form-control" id="basic-url" >
+              </div>
+          </div><!-- /.col-md-6 -->
+          <div class="col-md-3"></div>
+        </div><!-- /.row -->
+        <br/>
+          <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon3">Department:</span>
+                <input ng-model="BasicHandler.Basic.interview" Placeholder="Enter Department Name" type="text" class="form-control" id="basic-url" >
+              </div>
+          </div><!-- /.col-md-6 -->
+          <div class="col-md-3"></div>
+        </div><!-- /.row -->
+        <br/>
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon3">Name:</span>
+                <input type="text" ng-model="BasicHandler.Basic.Name" Placeholder="Enter Your FullName" class="form-control" id="basic-url" >
+              </div>
+          </div><!-- /.col-md-6 -->
+          <div class="col-md-3"></div>
+        </div><!-- /.row -->
+        <br/>
+        <h2><strong>InterView Marking Zone</strong></h2>
+         <h4><strong>1 Being Lowest Mark and 5 Being the Highest Mark</strong></h4>
+         <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <h3>Confidence</h3>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="confidence" value="1">&nbsp; 1 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="confidence" value="2">&nbsp; 2 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="confidence" value="3" checked>&nbsp; 3 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="confidence" value="4">&nbsp; 4 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="confidence" value="5">&nbsp; 5 &nbsp;</label>
+            </div><!-- /.col-md-6 -->
+            <div class="col-md-3"></div>
+        </div><!-- /.row -->
+        <hr/>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <h3>Speaking Skills(Hindi/English)</h3>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="speak" value="1">&nbsp; 1 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="speak" value="2">&nbsp; 2 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="speak" value="3" checked>&nbsp; 3 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="speak" value="4">&nbsp; 4 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="speak" value="5">&nbsp; 5 &nbsp;</label>
+            </div><!-- /.col-md-6 -->
+            <div class="col-md-3"></div>
+        </div><!-- /.row -->
+        <hr/>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <h3>Knowledge of the field applied for</h3>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="knowledge" value="1">&nbsp; 1 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="knowledge" value="2">&nbsp; 2 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="knowledge" value="3" checked>&nbsp; 3 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="knowledge" value="4">&nbsp; 4 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="knowledge" value="5">&nbsp; 5 &nbsp;</label>
+            </div><!-- /.col-md-6 -->
+            <div class="col-md-3"></div>
+        </div><!-- /.row -->
+        <hr/>
+         <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <h3>Responsibility</h3>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="responsibility" value="1">&nbsp; 1 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="responsibility" value="2">&nbsp; 2 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="responsibility" value="3" checked>&nbsp; 3 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="responsibility" value="4">&nbsp; 4 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="responsibility" value="5">&nbsp; 5 &nbsp;</label>
+            </div><!-- /.col-md-6 -->
+            <div class="col-md-3"></div>
+        </div><!-- /.row -->
+        <hr/>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <h3>Time Devotion</h3>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="time" value="1">&nbsp; 1 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="time" value="2">&nbsp; 2 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="time" value="3" checked>&nbsp; 3 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="time" value="4">&nbsp; 4 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="time" value="5">&nbsp; 5 &nbsp;</label>
+            </div><!-- /.col-md-6 -->
+            <div class="col-md-3"></div>
+        </div><!-- /.row -->
+        <hr/>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <h3>Work Devotion</h3>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="work" value="1">&nbsp; 1 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="work" value="2">&nbsp; 2 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="work" value="3" checked>&nbsp; 3 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="work" value="4">&nbsp; 4 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="work" value="5">&nbsp; 5 &nbsp;</label>
+            </div><!-- /.col-md-6 -->
+            <div class="col-md-3"></div>
+        </div><!-- /.row -->
+        <hr/>
+         <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <h3>Overall Marks</h3>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="overall" value="1">&nbsp; 1 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="overall" value="2">&nbsp; 2 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="overall" value="3" checked>&nbsp; 3 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="overall" value="4">&nbsp; 4 &nbsp;</label>
+              <label class="radio-inline"><input style="width:80%;height:80%;" type="radio" name="overall" value="5">&nbsp; 5 &nbsp;</label>
+            </div><!-- /.col-md-6 -->
+            <div class="col-md-3"></div>
+        </div><!-- /.row -->
+       <hr/>
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon3">Additional Comments</span>
+                <textarea ng-model="BasicHandler.Comments" placeholder="Enter Additional Comments about Interviewee(if any)" class="form-control custom-control" rows="4" style="resize:none"></textarea>
+              </div>
+          </div><!-- /.col-md-6 -->
+          <div class="col-md-3"></div>
+        </div><!-- /.row -->
+        <hr/>
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+              <div class="input-group">
+                <button ng-click="BasicHandler.Reset();" class="btn btn-primary" type="button">Reset</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                 <button ng-click="BasicHandler.VerifyFinal();" class="btn btn-primary" type="button">Submit</button>
+             
+              </div>
+          </div><!-- /.col-md-6 -->
+          <div class="col-md-3"></div>
+        </div><!-- /.row -->
+        <hr/>
+        
+     </div>
+     
+     <div ng-if="Thanks"  ng-controller="ThanksCtrl as ThanksHandler">
+         <h2><strong>Thank You For Your Submission</strong></h2>
+         <h4><strong>You Just Helped To Save another Bit of Paper</strong></h4> 
+         <button type="button" class="btn btn-success" ng-click="ThanksHandler.Reset()">Take Another Interview</button>
+     </div>
+     <div ng-if="Export"  ng-controller="ExportCtrl as ExportHandler">
+         <h2><strong>Click To Export an Excel File</strong></h2>
+         <button type="button" class="btn btn-success" ng-click="ExportHandler.exportData()">Export To Excel</button>
+     </div>
+     <div ng-if="DataDelete"  ng-controller="DeleteCtrl as DeleteHandler">
+         <h2><strong>Enter Master Password To Delete All Saved Entries</strong></h2>
+         <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <div class="input-group">
+              <input type="password" ng-model="DeleteHandler.pwd" class="form-control" placeholder="Enter Master Password">
+              <span class="input-group-btn">
+                <button ng-click="DeleteHandler.deleteAll();" class="btn btn-danger" type="button">Delete All!!</button>
+              </span>
+            </div><!-- /input-group -->
+          </div><!-- /.col-md-6 -->
+          <div class="col-md-3"></div>
+        </div><!-- /.row -->
+     </div>
+    </center>
+ </body>
+</html>
+
+
+
+
